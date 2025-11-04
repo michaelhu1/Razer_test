@@ -1,0 +1,3 @@
+Final model: mean=247.1 ± 42.3
+Best model: mean=228.2 ± 87.3
+
