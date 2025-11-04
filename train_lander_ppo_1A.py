@@ -25,13 +25,12 @@ train_env = VecMonitor(train_env, os.path.join(SAVE_DIR, "train_monitor"))
 eval_env = Monitor(gym.make(ENV_ID, continuous=True),
                    filename=os.path.join(SAVE_DIR, "eval_monitor", "monitor.csv"))
 
-
+#using default SB3 hyperparameters 
 model = PPO(
     policy="MlpPolicy",
     env=train_env,
     seed=SEED,
     verbose=2,
-
 )
 
 eval_cb = EvalCallback(

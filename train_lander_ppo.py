@@ -14,6 +14,7 @@ SAVE_DIR = "ppo_lander_cont"
 N_ENVS = 8
 N_STEPS = 2048
 BATCH_SIZE = 64
+
 os.makedirs(SAVE_DIR, exist_ok=True)
 os.makedirs(os.path.join(SAVE_DIR, "train_monitor"), exist_ok=True)
 os.makedirs(os.path.join(SAVE_DIR, "eval_monitor"), exist_ok=True)
@@ -27,11 +28,12 @@ train_env = VecMonitor(train_env, os.path.join(SAVE_DIR, "train_monitor"))
 eval_env = Monitor(gym.make(ENV_ID, continuous=True),
                    filename=os.path.join(SAVE_DIR, "eval_monitor", "monitor.csv"))
 
-lr0 = 3e-4
-clip0, clip_end = 0.2, 0.05
+lr0 = 3e-4 #initial learning rate
+clip0, clip_end = 0.2, 0.05 #clip range
 lr_schedule   = get_linear_fn(lr0, 0.0, 1.0)
 clip_schedule = get_linear_fn(clip0, clip_end, 1.0)
 
+#2 hidden layers with 256 neurons each
 policy_kwargs = dict(
     net_arch=[256, 256],
     ortho_init=False,       # helps reduce early oversized updates
